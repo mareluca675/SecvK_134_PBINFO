@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int long long n, v[100001], z[100001], y[100001], i, j, secvk, st, k;
+
+int main()
+{
+    ifstream fin("secvk.in");
+    ofstream fout("secvk.out");
+    
+    fin >> n >> k;
+    int copiek = k;
+    
+    for(i = 1; i <= n; i++)
+    {
+        fin >> v[i];
+        y[i] = y[i - 1] + v[i];
+    }
+    
+    for(i = 1; i <= n; i++)
+    {
+        for(j = i + 1; j <= k + 1; j++)
+        {
+            z[i] += y[k] - y[k - copiek];
+        }
+        k++;
+    }
+    
+    for(i = 1; i <= n - copiek +1; i++)
+    {
+       if(z[i] > secvk)
+       {
+           secvk = z[i];
+           st = i;
+       }
+    }
+    
+    for(i = 1; i <= copiek; i++, st++)
+    {
+        fout << v[st] << " ";
+    }
+
+    return 0;
+}
